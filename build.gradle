@@ -1,0 +1,78 @@
+plugins {
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'groovy'
+	id 'jacoco'
+}
+
+group = 'com.cube-app'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+//	integrationCompile.extendsFrom testCompile
+//	integrationRuntime.extendsFrom testRuntime
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
+	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+
+//	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+//	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+//	compileOnly 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.2-M1-groovy-4.0'
+	testImplementation group: 'org.spockframework', name: 'spock-spring', version: '2.2-M1-groovy-4.0'
+}
+
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}
+
+//compileJava {
+//	options.compilerArgs = [
+//			'-Amapstruct.defaultComponentModel=spring',
+//			'-Amapstruct.suppressGeneratorTimestamp=true',
+//			'-Amapstruct.defaultComponentModel=spring',
+//			'-Amapstruct.verbose=true'
+//
+//	]
+//}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+	finalizedBy jacocoTestReport // report is always generated after tests run
+}
+
+jacoco {
+	toolVersion = "0.8.7"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+	dependsOn test // tests are required to run before generating the report
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}
