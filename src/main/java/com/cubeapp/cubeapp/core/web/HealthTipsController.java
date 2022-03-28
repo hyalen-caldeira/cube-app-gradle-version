@@ -22,7 +22,7 @@ public class HealthTipsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<String>> getHealthTips() {
+    public ResponseEntity<List<HealthTipsDto>> getHealthTips() {
         var list = service.getHealthTips();
 
         return new ResponseEntity<>(list, HttpStatus.OK);

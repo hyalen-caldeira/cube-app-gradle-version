@@ -5,5 +5,5 @@ import com.cubeapp.cubeapp.core.dto.client.HealthTipsDto;
 import java.util.List;
 
 public interface HealthTipsService {
-    List<String> getHealthTips();
+    List<HealthTipsDto> getHealthTips();
 }
