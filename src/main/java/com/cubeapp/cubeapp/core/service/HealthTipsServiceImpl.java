@@ -34,7 +34,6 @@ public class HealthTipsServiceImpl implements HealthTipsService {
         tips = shuffle(tips);
 
         return tips;
-
     }
 
     private List<HealthTipsDto> shuffle(List<HealthTipsDto> tips) {
