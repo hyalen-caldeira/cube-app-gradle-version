@@ -33,7 +33,7 @@ class UserControllerTest extends Specification {
 
     // GET ALL users
     def "when get all users is performed, then the response has status 200 and all users will be returned"() {
-        expect: "Status is 200 and the response is 'hyalen'"
+        expect: "Status is 200"
         mvc.perform(MockMvcRequestBuilders.get("/api/users")).andExpect(MockMvcResultMatchers.status().isOk())
     }
 
