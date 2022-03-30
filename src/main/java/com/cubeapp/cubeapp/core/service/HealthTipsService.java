@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface HealthTipsService {
     List<HealthTipsDto> getHealthTips();
+    List<HealthTipsDto> getHealthTipsById(long id);
 }

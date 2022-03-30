@@ -1,4 +1,4 @@
-package com.cubeapp.cubeapp.service
+package com.cubeapp.cubeapp.core.service
 
 import com.cubeapp.cubeapp.CubeAppApplication
 import com.cubeapp.cubeapp.core.NotFoundException

@@ -1,7 +1,6 @@
 package com.cubeapp.cubeapp.core.service;
 
 import com.cubeapp.cubeapp.core.dto.client.HealthTipsDto;
-import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class HealthTipsServiceImpl implements HealthTipsService {
@@ -36,7 +34,26 @@ public class HealthTipsServiceImpl implements HealthTipsService {
         return tips;
     }
 
+    @Override
+    public List<HealthTipsDto> getHealthTipsById(long id) {
+        ResponseEntity<List<HealthTipsDto>> responseEntity = restTemplate.exchange(
+                HOST_PORT + BASE_URI + '/' + id,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<HealthTipsDto>>() {}
+        );
+
+        List<HealthTipsDto> tips = responseEntity.getBody();
+
+        tips = shuffle(tips);
+
+        return tips;
+    }
+
     private List<HealthTipsDto> shuffle(List<HealthTipsDto> tips) {
+        if (tips == null || tips.size() == 0)
+            return tips;
+
         Random random = new Random();
 
         Map<Integer, HealthTipsDto> shuffledMap = new HashMap<>();
@@ -46,7 +63,7 @@ public class HealthTipsServiceImpl implements HealthTipsService {
 
         List<HealthTipsDto> shuffledList = new LinkedList<>();
 
-        while (shuffledList.size() != 3) {
+        while (shuffledList.size() < 3 && shuffledList.size() != shuffledMap.size()) {
             int id = random.nextInt(shuffledMap.size());
 
             if (!shuffledList.contains(shuffledMap.get(id)))

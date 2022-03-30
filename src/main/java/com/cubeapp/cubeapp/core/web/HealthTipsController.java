@@ -4,10 +4,7 @@ import com.cubeapp.cubeapp.core.dto.client.HealthTipsDto;
 import com.cubeapp.cubeapp.core.service.HealthTipsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +23,12 @@ public class HealthTipsController {
         var list = service.getHealthTips();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<List<HealthTipsDto>> getHealthTipsById(@PathVariable(value = "id") long id) {
+        var tips = service.getHealthTipsById(id);
+
+        return new ResponseEntity<>(tips, HttpStatus.OK);
     }
 }

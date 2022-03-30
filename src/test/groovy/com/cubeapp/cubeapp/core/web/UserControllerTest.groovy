@@ -1,4 +1,4 @@
-package com.cubeapp.cubeapp
+package com.cubeapp.cubeapp.core.web
 
 import com.cubeapp.cubeapp.core.dto.UserDto
 import com.fasterxml.jackson.databind.ObjectMapper
