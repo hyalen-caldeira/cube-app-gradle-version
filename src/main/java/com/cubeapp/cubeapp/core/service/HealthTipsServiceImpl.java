@@ -29,13 +29,13 @@ public class HealthTipsServiceImpl implements HealthTipsService {
 
         List<HealthTipsDto> tips = responseEntity.getBody();
 
-        tips = shuffle(tips);
+        // tips = shuffle(tips);
 
         return tips;
     }
 
     @Override
-    public List<HealthTipsDto> getHealthTipsById(long id) {
+    public List<HealthTipsDto> getHealthTipsByUserId(long id) {
         ResponseEntity<List<HealthTipsDto>> responseEntity = restTemplate.exchange(
                 HOST_PORT + BASE_URI + '/' + id,
                 HttpMethod.GET,
@@ -45,31 +45,31 @@ public class HealthTipsServiceImpl implements HealthTipsService {
 
         List<HealthTipsDto> tips = responseEntity.getBody();
 
-        tips = shuffle(tips);
+        // tips = shuffle(tips);
 
         return tips;
     }
 
-    private List<HealthTipsDto> shuffle(List<HealthTipsDto> tips) {
-        if (tips == null || tips.size() == 0)
-            return tips;
-
-        Random random = new Random();
-
-        Map<Integer, HealthTipsDto> shuffledMap = new HashMap<>();
-
-        for (int i = 0; i < tips.size(); i++)
-            shuffledMap.put(i, tips.get(i));
-
-        List<HealthTipsDto> shuffledList = new LinkedList<>();
-
-        while (shuffledList.size() < 3 && shuffledList.size() != shuffledMap.size()) {
-            int id = random.nextInt(shuffledMap.size());
-
-            if (!shuffledList.contains(shuffledMap.get(id)))
-                shuffledList.add(shuffledMap.get(id));
-        }
-
-        return shuffledList;
-    }
+//    private List<HealthTipsDto> shuffle(List<HealthTipsDto> tips) {
+//        if (tips == null || tips.size() == 0)
+//            return tips;
+//
+//        Random random = new Random();
+//
+//        Map<Integer, HealthTipsDto> shuffledMap = new HashMap<>();
+//
+//        for (int i = 0; i < tips.size(); i++)
+//            shuffledMap.put(i, tips.get(i));
+//
+//        List<HealthTipsDto> shuffledList = new LinkedList<>();
+//
+//        while (shuffledList.size() < 3 && shuffledList.size() != shuffledMap.size()) {
+//            int id = random.nextInt(shuffledMap.size());
+//
+//            if (!shuffledList.contains(shuffledMap.get(id)))
+//                shuffledList.add(shuffledMap.get(id));
+//        }
+//
+//        return shuffledList;
+//    }
 }

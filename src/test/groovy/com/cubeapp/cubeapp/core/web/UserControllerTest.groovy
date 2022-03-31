@@ -52,6 +52,8 @@ class UserControllerTest extends Specification {
 
         then: "the User is created"
             mvc.perform(get(BASE_URI + NAME)).andExpect(status().isOk())
+        and:
+            mvc.perform(get(BASE_URI + "/findByName/" + NAME)).andExpect(status().isOk())
     }
 
     // UPDATE an user and find by name

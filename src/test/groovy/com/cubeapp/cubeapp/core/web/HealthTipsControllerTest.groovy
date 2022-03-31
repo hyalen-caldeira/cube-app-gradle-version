@@ -29,4 +29,9 @@ class HealthTipsControllerTest extends Specification {
         expect: "Status is 200"
         mvc.perform(MockMvcRequestBuilders.get("/api/health-tips")).andExpect(MockMvcResultMatchers.status().isOk())
     }
+
+    def "when get all health tips by user id is performed, then the response has status 200 and all health tips will be returned"() {
+        expect: "Status is 200"
+        mvc.perform(MockMvcRequestBuilders.get("/api/health-tips/33")).andExpect(MockMvcResultMatchers.status().isOk())
+    }
 }

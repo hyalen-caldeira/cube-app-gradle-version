@@ -7,9 +7,10 @@ import java.io.Serializable;
 @Getter
 @Setter
 @AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @NoArgsConstructor
 public class HealthTipsDto implements Serializable {
     long id;
     String tip;
+    long userId;
 }

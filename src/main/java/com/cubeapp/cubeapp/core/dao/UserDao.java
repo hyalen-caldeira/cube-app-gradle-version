@@ -32,13 +32,13 @@ public class UserDao {
         repository.save(model);
     }
 
-    public boolean existsByName(String name) {
-        return repository.existsByName(name);
-    }
-
-    public boolean existsByEmail(String email) {
-        return repository.existsByEmail(email);
-    }
+//    public boolean existsByName(String name) {
+//        return repository.existsByName(name);
+//    }
+//
+//    public boolean existsByEmail(String email) {
+//        return repository.existsByEmail(email);
+//    }
 
 //    public boolean existsByUsername(String username) {
 //        return repository.existsByUsername(username);

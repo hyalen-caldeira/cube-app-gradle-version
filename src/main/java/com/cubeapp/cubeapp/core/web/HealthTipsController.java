@@ -25,9 +25,9 @@ public class HealthTipsController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<List<HealthTipsDto>> getHealthTipsById(@PathVariable(value = "id") long id) {
-        var tips = service.getHealthTipsById(id);
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<List<HealthTipsDto>> getHealthTipsByUserId(@PathVariable(value = "userId") long userId) {
+        var tips = service.getHealthTipsByUserId(userId);
 
         return new ResponseEntity<>(tips, HttpStatus.OK);
     }
