@@ -4,19 +4,18 @@ import com.cubeapp.cubeapp.CubeAppApplication
 import com.cubeapp.cubeapp.core.dto.client.HealthTipsDto
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.ParameterizedTypeReference
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.web.WebAppConfiguration
 import org.springframework.web.client.RestTemplate
 import spock.lang.Specification
-import org.springframework.http.HttpStatus;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes = CubeAppApplication.class)
 @WebAppConfiguration
@@ -56,7 +55,7 @@ class HealthTipsServiceImplTest extends Specification {
                 new ParameterizedTypeReference<List<HealthTipsDto>>() {}))
                 .thenReturn(new ResponseEntity(Arrays.asList(healthTipsDto), HttpStatus.OK));
 
-        when: "A list of users is required"
+        when: "A list of health tips is required"
         var healthTipsDto = service.getHealthTips();
 
         then: "A list of health tips will be returned"
@@ -75,7 +74,7 @@ class HealthTipsServiceImplTest extends Specification {
                 new ParameterizedTypeReference<List<HealthTipsDto>>() {}))
                 .thenReturn(new ResponseEntity(Arrays.asList(healthTipsDto), HttpStatus.OK));
 
-        when: "A list of users is required"
+        when: "A list of health tips is required"
         var healthTipsDto = service.getHealthTipsByUserId(1);
 
         then: "A list of health tips will be returned"
